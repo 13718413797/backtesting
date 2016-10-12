@@ -16,7 +16,7 @@ class HeatFilterTest extends FlatSpec with Matchers {
   it should "return a result that is greater the heat standard" in {
 
     val path = ""
-    val heatStandard = 1000
+    val heatStandard = 100
     val config = Configuration.getConfigurations(path)
     val redisMap = config._1
     RedisHandler.init(redisMap.get("ip").get, redisMap.get("port").get.toInt, redisMap.get("auth").get, redisMap.get("db").get.toInt)
@@ -28,7 +28,7 @@ class HeatFilterTest extends FlatSpec with Matchers {
       val dateAndHeat = result.split(",")
       val date = dateAndHeat(0)
       println(dateAndHeat(1))
-      val heat = dateAndHeat(1).toInt
+      val heat = dateAndHeat(1).toDouble.toInt
       heat should be > heatStandard
     })
 
